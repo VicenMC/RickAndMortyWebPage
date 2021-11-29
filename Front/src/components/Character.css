@@ -1,0 +1,78 @@
+
+
+/*.charCard{
+	color: white;
+	display: inline-block;
+	padding: 20px;
+	background-color: black;
+	margin:  5px;
+}
+
+.deathImage{
+	max-width: 6vw;
+	max-height: 10vh;
+}*/
+
+.wrap{
+display: inline-block;
+justify-content: center;
+}
+
+.tarjeta-wrap{
+	margin: 10px;
+	perspective: 800;
+	-webkit-perspective: 800;
+}
+
+.deathImage{
+	max-width: 6vw;
+	max-height: 10vh;
+}
+
+.tarjeta{
+	width: 200px;
+	height: 250px;
+	background-color: orange;
+	position: relative;
+	transform-style: preserve-3d;
+	border-radius: 10px;
+	transition: 1s ease;
+	-webkit-box-shadow:  0px 10px 15px -5px rgba(0,0,0,0.65);
+	-moz-box-shadow:  0px 10px 15px -5px rgba(0,0,0,0.65);
+	box-shadow:  0px 10px 15px -5px rgba(0,0,0,0.65);
+}
+/*El webkit se agrega para que funcione en algunos navegadores*/
+
+.frontName{
+	color: whitesmoke;
+	font-family: 'open sans';
+	margin-top: 0.7vh;
+}
+
+.imageCharacter{
+	width: 100%;
+}
+
+.adelante, .atras{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+}
+
+.atras{
+	transform: rotateY(180deg);
+	font-family: 'open sans';
+	color:  white;
+	justify-content: center;
+align-items: center;
+text-align: center;
+background: url;
+}
+
+.tarjeta-wrap:hover .tarjeta{
+transform: rotateY(180deg);
+}
