@@ -12,7 +12,6 @@ module.exports = {
   	let objeto = [];
   	const pageApi = '?page=:page'
   	let actualPage = page;
-  	let pageTotal = 42;
     let obj = axios
       .get(`http://rickandmortyapi.com/api/character${pageApi.replace(':page',`${actualPage}`)}`)
       .then((resultado) => (resultado = resultado.data.results))
@@ -22,11 +21,64 @@ module.exports = {
         );
         return objeto;
       });
-
     return obj;
   },
 
+  async charInfo(name, page){
+	let locationCollection = [];
+let obj = axios
+.get(`http://rickandmortyapi.com/api/character?page=${page}&&name=${name}`)
+.then((resultado) => (resultado = resultado.data))
+.then((result) => (result = result.results))
+.then((resu) => {
+	resu.map((e) => locationCollection.push({
+	id: e.id,
+	name: e.name,
+	status: e.status,
+	species: e.species,
+	type: e.type || 'No type found',
+	gender: e.gender,
+	origin: e.origin.name,
+	location: e.location.name,
+	image: e.image
+	})
+	);
+	return locationCollection;
+})
+return obj
+},
 
+  pageCalculate: () => {
+	  let totalPages = 0
+	  try{
+	  let obj = axios
+	  .get(`https://rickandmortyapi.com/api/character`)
+	  .then((result) => result.data)
+	  .then((resu) => {
+		  totalPages = resu.info.pages;
+		  return totalPages;
+	  })
+	  return obj;
+	}catch(e){
+		console.log(e)
+	}
+  },
+
+  searchPageCalculate: (name) => {
+	let totalPages = 0
+	try{
+	let obj = axios
+	.get(`https://rickandmortyapi.com/api/character?name=${name}`)
+	.then((result) => result.data)
+	.then((resu) => {
+		totalPages = resu.info.pages;
+		return totalPages;
+	})
+	return obj;
+  }catch(e){
+	  console.log(e)
+  }
+  },
 
 /*async allCharacters(){
 	const finalArr = [];
@@ -88,29 +140,6 @@ async allLocations(){
 },
 
 
-async charInfo(name){
-		let locationCollection = [];
-	let obj = axios
-	.get(`http://rickandmortyapi.com/api/character?name=${name}`)
-	.then((resultado) => (resultado = resultado.data))
-	.then((result) => (result = result.results))
-	.then((resu) => {
-		resu.map((e) => locationCollection.push({
-		id: e.id,
-		name: e.name,
-		status: e.status,
-		species: e.species,
-		type: e.type || 'No type found',
-		gender: e.gender,
-		origin: e.origin.name,
-		location: e.location.name,
-		image: e.image
-		})
-		);
-		return locationCollection;
-	})
-return obj
-},
 
 async createCharacter(req, res) {
     const { ID, name, status, species, type, gender, origin, image } = req.body;

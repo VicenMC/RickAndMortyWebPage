@@ -3,30 +3,41 @@ const router = express.Router();
 const {Sequelize} = require('sequelize');
 const { Character, Locations, Episode} = require('../db/connections.js');
 const {
+	pageCalculate,
 	allCharacters,
 	allEpisodes,
 	allLocations,
 	charInfo,
+	searchPageCalculate,
 	createCharacter
 } = require('../controllers/controller.js')
 const controller = require("../controllers/controller.js");
 
 
-
-
 router.route('/characters').get(async (req, res) => {
-	let {name} = req.query;
+	let {name, page} = req.query;
+	let searchResults = [];
+	let finalResults = [];
 	if(name){
-		let specificCharacter = await charInfo(name)
-		return res.json(specificCharacter);
+		let searchPages = await searchPageCalculate(name);
+		console.log(searchPages)
+		searchResults.push(searchPages);
+		if(page > searchPages){
+			return res.json("Page doesnt exist")
+		}
+		let specificCharacter = await charInfo(name, page);
+		searchResults.push(specificCharacter);
+		return res.json(searchResults);
 	}else{
 	try{
-		let characterInfo = []
-		for(let i = 1; i < 42; i++){
-		let totalChar = await allCharacters(i);
-		characterInfo.push(totalChar) /*[i] despues de esto*/
-	}
-		return res.json(characterInfo);
+		let totalPages = await pageCalculate();
+		finalResults.push(totalPages);
+		if(page > totalPages){
+			return res.json("Page doesnt exist")
+		}
+		let totalChar = await allCharacters(page);
+		finalResults.push(totalChar);
+		return res.json(finalResults);
 	}catch(e){
 		return res.json(e)
 	}

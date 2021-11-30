@@ -1,22 +1,26 @@
 const initialState = {
   Characs: [],
+  searchedCharacters:[],
+  IncludedPages:[],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "CHARS": {
       state = initialState;
-      // console.log("reducer" + action.payload[0].name)
       return {
         ...state,
-        Characs: state.Characs.concat(action.payload.chars.flat()),
+        Characs: state.Characs.concat(action.payload.chars[1]),
+        IncludedPages: state.IncludedPages.concat(action.payload.chars[0])
       };
     }
     case "BUSCAR":{
       state = initialState;
+console.log(action.payload.searchCarac)
       return {
         ...state,
-        Characs: state.Characs.concat(action.payload.searchCarac)
+        searchedCharacters: state.searchedCharacters.concat(action.payload.searchCarac[1]),
+        IncludedPages: state.IncludedPages.concat(action.payload.searchCarac[0])
       }
     }
     default: {
