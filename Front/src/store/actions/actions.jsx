@@ -25,3 +25,25 @@ export const Buscar =(arg, page) => {
     }
   }
 }
+
+export const Episodios = () => {
+  return async (dispatch) => {
+    try{
+      const response = await axios.get(`/episodes`);
+      if(response?.data){
+        dispatch({type: "EPISODES", payload: {episodes: response.data}})
+      }
+    }catch(e){
+      console.log(e)
+    }
+  }
+}
+
+export const FiltrarEpisodios = (arg) => {
+      if (arg !== "") {
+      return {
+        type: "FILTRAREPISODIOS",
+        payload: arg,
+      };
+    }
+  };

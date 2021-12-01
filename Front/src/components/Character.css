@@ -19,6 +19,7 @@ justify-content: center;
 }
 
 .tarjeta-wrap{
+	
 	margin: 10px;
 	perspective: 800;
 	-webkit-perspective: 800;
@@ -30,8 +31,8 @@ justify-content: center;
 }
 
 .tarjeta{
-	width: 200px;
-	height: 250px;
+	width: 300px;
+	height: 350px;
 	background-color: orange;
 	position: relative;
 	transform-style: preserve-3d;

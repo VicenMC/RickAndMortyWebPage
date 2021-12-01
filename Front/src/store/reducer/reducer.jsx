@@ -2,6 +2,8 @@ const initialState = {
   Characs: [],
   searchedCharacters:[],
   IncludedPages:[],
+  Episodes:[],
+  FiltradoEpisodes:[],
 };
 
 const reducer = (state = initialState, action) => {
@@ -16,11 +18,20 @@ const reducer = (state = initialState, action) => {
     }
     case "BUSCAR":{
       state = initialState;
-console.log(action.payload.searchCarac)
       return {
         ...state,
         searchedCharacters: state.searchedCharacters.concat(action.payload.searchCarac[1]),
         IncludedPages: state.IncludedPages.concat(action.payload.searchCarac[0])
+      }
+    }case "EPISODES":{
+      return{
+        ...state,
+        Episodes: state.Episodes.concat(action.payload.episodes)
+      }
+    }case "FILTRAREPISODIOS":{
+      return{
+        ...state,
+        FiltradoEpisodes:state.Characs.concat(action.payload.arg)
       }
     }
     default: {

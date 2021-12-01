@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Chars,
-  Buscar
+  Buscar,
+  Episodios,
+  FiltrarEpisodios,
 } from "../store/actions/actions.jsx";
 import Pagination from "../components/Pagination";
 import SearchBar from "../components/Searchbar";
+import EpisodeButton from "../components/EpisodeButton";
 import Characters from "../components/Characters";
 import "./mainPage.css";
 //background-image: url('http://pa1.narvii.com/6810/0f849dc1fdeabe3f6179139541619285a1776cba_00.gif');
@@ -108,13 +111,21 @@ if(currentSearch.length === 0){
    setPage(1);
    dispatch(Buscar(arg, 1));
    setCurrentSearch(arg);
-   
  }
+
+ const FiltradoEpisodios = (arg) => {
+  dispatch(FiltrarEpisodios(arg));
+};
+
    return(
   <div className="generalContainer">
     <button className="prevButton" id="next" onClick={pageChangeInc}>next</button>
       <button className="nextButton" id="prev" onClick={pageChangeDec}>Prev</button>
-  <SearchBar busqueda={Busqueda}/>
+      <EpisodeButton
+              Episodios={Episodios}
+              FiltradoEpisodios={FiltradoEpisodios}
+            />
+        <SearchBar busqueda={Busqueda} />
         <div className="characterContainer">
         <Characters posts={currentPosts} loading={loading} />
         </div>    

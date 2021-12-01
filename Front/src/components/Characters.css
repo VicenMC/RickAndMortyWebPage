@@ -1,5 +1,3 @@
 .charCards{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+padding-inline-start: 0px;
 }

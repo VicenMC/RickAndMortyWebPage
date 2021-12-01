@@ -30,7 +30,7 @@ router.route('/characters').get(async (req, res) => {
 		return res.json(searchResults);
 	}else{
 	try{
-		let totalPages = await pageCalculate();
+		let totalPages = await pageCalculate('character');
 		finalResults.push(totalPages);
 		if(page > totalPages){
 			return res.json("Page doesnt exist")
@@ -48,10 +48,10 @@ router.route('/characters').get(async (req, res) => {
 
 router.route('/episodes').get(async (req, res) => {
 	try{
-		let episodeInfo = []
-		let totalEp = await allEpisodes();
-		episodeInfo.push(totalEp[0]) /*[i] despues de esto*/
-		return res.json(episodeInfo);
+		let totalPages = await pageCalculate('episode');
+		let totalEp = await allEpisodes(totalPages);
+		totalEp.push(totalPages)
+		return res.json(totalEp);
 	}catch(e){
 		return res.json(e)
 	}
@@ -62,10 +62,9 @@ router.route('/episodes').get(async (req, res) => {
 router.route('/locations').get(async (req, res) => {
 	let {pag} = req.query;
 	try{
-		let locationInfo = []
-		let totalLoc = await allLocations();
-		locationInfo.push(totalLoc[0]) /*[i] despues de esto*/
-		return res.json(locationInfo);
+		let totalPages = await pageCalculate('location');
+		let totalLoc = await allLocations(totalPages);
+		return res.json(totalLoc[0][0].flat());
 	}catch(e){
 		return res.json(e)
 	}

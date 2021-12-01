@@ -1,4 +1,5 @@
 const { default: axios} = require('axios');
+const { response } = require('express');
 
 //Calling our models
 const { Character } = require("../db/connections.js");
@@ -48,11 +49,11 @@ let obj = axios
 return obj
 },
 
-  pageCalculate: () => {
+  pageCalculate: (searchEndpoint) => {
 	  let totalPages = 0
 	  try{
 	  let obj = axios
-	  .get(`https://rickandmortyapi.com/api/character`)
+	  .get(`https://rickandmortyapi.com/api/${searchEndpoint}`)
 	  .then((result) => result.data)
 	  .then((resu) => {
 		  totalPages = resu.info.pages;
@@ -99,10 +100,10 @@ return obj
 	})
 	return finalArr;
 },*/
-async allEpisodes(){
+async allEpisodes(totalPages){
 	const finalArr = [];
 	const promises = [];
-	for (let page = 1; page <= 3; page++){
+	for (let page = 1; page <= totalPages; page++){
 		promises.push(
 			axios({method: 'get', url: `http://rickandmortyapi.com/api/episode?page=${page}`})
 			.then((result) => result=result.data)
@@ -119,10 +120,10 @@ async allEpisodes(){
 },
 
 
-async allLocations(){
+async allLocations(totalPages){
 	const finalArr = [];
 	const promises = [];
-	for (let page = 1; page <= 6; page++){
+	for (let page = 1; page <= totalPages; page++){
 		promises.push(
 			axios({method: 'get', url: `http://rickandmortyapi.com/api/location?page=${page}`})
 			.then((result) => result=result.data)
