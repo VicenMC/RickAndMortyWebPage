@@ -15,11 +15,9 @@ function App() {
     <Route exact path ="/" component={MainPage}>
       <Redirect to="/home" />
     </Route>
-    <NavBar />
     <Route exact path="/home" component={MainPage}/>
     <Route exact path="/episode" component={Episode}/>
     <Route exact path="/location" component={Location}/>
-
     </BrowserRouter>
     </div>
   );

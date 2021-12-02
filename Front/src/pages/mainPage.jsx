@@ -29,6 +29,7 @@ export default function MainPage(props) {
     let contenedor = characters;
     if(searchCharacs.length !== 0){
       contenedor = searchCharacs
+      console.log(contenedor.length)
     }else if(searchCharacs.length === 0){
       contenedor = characters
     }
@@ -119,13 +120,11 @@ if(currentSearch.length === 0){
 
    return(
   <div className="generalContainer">
-    <button className="prevButton" id="next" onClick={pageChangeInc}>next</button>
-      <button className="nextButton" id="prev" onClick={pageChangeDec}>Prev</button>
-      <EpisodeButton
-              Episodios={Episodios}
-              FiltradoEpisodios={FiltradoEpisodios}
-            />
-        <SearchBar busqueda={Busqueda} />
+    <div className="elementsContainer">
+    <button className="nextButton" id="prev" onClick={pageChangeDec}>Prev</button>
+    <button className="prevButton" id="next" onClick={pageChangeInc}>Next</button>
+    <SearchBar busqueda={Busqueda} />
+    </div>
         <div className="characterContainer">
         <Characters posts={currentPosts} loading={loading} />
         </div>    
@@ -133,4 +132,9 @@ if(currentSearch.length === 0){
   )
 }
 
+
+{/* <EpisodeButton
+Episodios={Episodios}
+FiltradoEpisodios={FiltradoEpisodios}
+/> */}
 //  <img src="https://help.redbubble.com/hc/article_attachments/360002309526/Rick_and_Morty_-_logo__English_.png" className="logoImage" alt="" />

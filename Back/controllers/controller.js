@@ -70,14 +70,23 @@ return obj
 	try{
 	let obj = axios
 	.get(`https://rickandmortyapi.com/api/character?name=${name}`)
+	.catch(err => {
+		if(err.response.status === 404){
+			return totalPages;
+		}
+	})
 	.then((result) => result.data)
 	.then((resu) => {
+		if(resu === undefined){
+			return totalPages
+		}else{
 		totalPages = resu.info.pages;
 		return totalPages;
+		}
 	})
 	return obj;
   }catch(e){
-	  console.log(e)
+	  return res.json(e)
   }
   },
 

@@ -33,7 +33,7 @@ justify-content: center;
 .tarjeta{
 	width: 300px;
 	height: 350px;
-	background-color: orange;
+	background-color: black;
 	position: relative;
 	transform-style: preserve-3d;
 	border-radius: 10px;
@@ -44,14 +44,27 @@ justify-content: center;
 }
 /*El webkit se agrega para que funcione en algunos navegadores*/
 
+.frontTextContainer{
+	max-height: 18%;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	vertical-align: middle;
+}
+
 .frontName{
 	color: whitesmoke;
 	font-family: 'open sans';
-	margin-top: 0.7vh;
+	font-size: 150%;
+	margin-top: 5%;
 }
 
 .imageCharacter{
-	width: 100%;
+	margin-top: 5%;
+	width: 90%;
+	border: 1px solid green;
+	border-image-slice: 1;
+	border-width: 5px;
 }
 
 .adelante, .atras{
@@ -70,10 +83,31 @@ justify-content: center;
 	color:  white;
 	justify-content: center;
 align-items: center;
-text-align: center;
+text-align: initial;
 background: url;
 }
 
 .tarjeta-wrap:hover .tarjeta{
 transform: rotateY(180deg);
+}
+
+.pName, .pOrigin, .pSpecies, .pGender, .pLocation, .pStatus{
+	font-size: 150%;
+	margin: 5%;
+}
+
+.pName{
+	text-decoration: underline #B2FF59;
+}
+
+.pStatus{
+	border: 1px solid;
+	border-image-slice: 1;
+	display: inline-block;
+	border-width: 10%;
+	perspective: 1px;
+	border-collapse: separate;
+	border-radius: 150px;
+	padding: 0px 7px;
+	/* border-image-source: linear-gradient(to left, #00C853, #B2FF59); */
 }

@@ -20,7 +20,9 @@ router.route('/characters').get(async (req, res) => {
 	let finalResults = [];
 	if(name){
 		let searchPages = await searchPageCalculate(name);
-		console.log(searchPages)
+		if(searchPages === 0){
+			return res.json("Page not found")
+		}
 		searchResults.push(searchPages);
 		if(page > searchPages){
 			return res.json("Page doesnt exist")
